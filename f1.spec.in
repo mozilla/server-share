@@ -47,7 +47,7 @@ from any webpage, using the same services you already know
 and love. F1 is made by Mozilla Messaging. 
 
 %prep
-%setup -q -n linkdrop-%{version}
+%setup -q -n ShareServer-%{version}
 
 %build
 export PYTHONPATH=$(pwd):%{f1_prefix}%{python_sitelib}:%{f1_prefix}%{python_sitearch}
