@@ -72,18 +72,18 @@ def _run(command):
 
 
 def _envname(name):
-    return name.upper().replace('-', '_')
+    return name.upper().replace('-', '_').replace(':', '_')
 
 
 def _update_cmd(project, latest_tags=False, repo_type='git'):
-    if latest_tags:
+    rev = os.environ.get(_envname(project))
+    if not rev and latest_tags:
         if repo_type == 'hg':
             return 'hg up -r "%s"' % get_latest_tag()
         else:
             return 'git checkout -r "%s"' % get_latest_tag()
     else:
         # looking for an environ with a specific tag or rev
-        rev = os.environ.get(_envname(project))
         if rev is not None:
             if not verify_tag(rev):
                 print('Unknown tag or revision: %s' % rev)
@@ -173,11 +173,11 @@ def main(project_name, deps):
                 missing += 1
 
         # we want all tag or no tag
-        if missing > 0 and missing < len(projects):
-            print("You did not specify all tags: ")
-            for project, tag in tags.items():
-                print('    %s: %s' % (project, tag))
-            sys.exit(1)
+        #if missing > 0 and missing < len(projects):
+        #    print("You did not specify all tags: ")
+        #    for project, tag in tags.items():
+        #        print('    %s: %s' % (project, tag))
+        #    sys.exit(1)
 
     build_app(project_name, latest_tags, deps)
 

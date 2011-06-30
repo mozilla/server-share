@@ -4,6 +4,7 @@ else
 BIN_DIR = bin
 endif
 
+export MOZILLA_SERVER_CORE = 707
 APPNAME = server-shared-send
 DEPS = mozilla:server-core,github:server-share-core,github:client-share-web
 DEV_DEPS = github:server-core,github:server-share-core,github:client-share-web
